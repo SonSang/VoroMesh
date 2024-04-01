@@ -145,3 +145,5 @@ dmypy.json
 *.hdf5
 
 result_*
+
+output/

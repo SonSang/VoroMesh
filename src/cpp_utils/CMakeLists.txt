@@ -7,6 +7,8 @@ set(CMAKE_BUILD_TYPE "Release")
 set(PYBIND11_PYTHON_VERSION 3.6)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -fPIC -lmpfr -lgmp")
 
+set(CGAL_DIR /home/sson/diffdt/external/cgal/build)
+
 find_package(pybind11 REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(CGAL REQUIRED)
@@ -17,6 +19,10 @@ pybind11_add_module(${PROJECT_NAME} pywrap.cpp)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PYBIND11_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CGAL_INCLUDE_DIRS}
+)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE Eigen3::Eigen)
 target_link_libraries(${PROJECT_NAME} PRIVATE mpfr)
 target_link_libraries(${PROJECT_NAME} PRIVATE gmp)
